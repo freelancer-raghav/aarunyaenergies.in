@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biofuel Blog — Industry Insights | Aarunya Energies</title>
+  <meta name="description" content="Expert insights on solid biofuel trading, briquettes, pellets, biomass energy trends, and industry news from Aarunya Energies Private Limited." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.aarunyaenergies.in/blog/blog.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/style.css" />
+  <link rel="stylesheet" href="../styles/blog.css" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+</head>
+<body class="blog-page">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-solid" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="../index.html" class="logo" aria-label="Aarunya Energies Private Limited — Home">
+        <img src="../images/logo.png" alt="Aarunya Energies" class="logo-img" />
+        <span class="logo-text">Aarunya <span class="logo-accent">Energies</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks" role="list">
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#products">Products</a></li>
+        <li><a href="../index.html#industries">Industries</a></li>
+        <li><a href="blog.html" class="nav-active">Blog</a></li>
+        <li><a href="../index.html#contact" class="nav-cta">Get a Quote</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <header class="blog-hero">
+    <div class="blog-hero-content">
+      <span class="section-tag">Knowledge Hub</span>
+      <h1>Biofuel Insights &amp; Industry News</h1>
+      <p>Trends, guides, and updates from the solid biofuel trading sector — briquettes, pellets, biomass energy, and more.</p>
+      <div class="blog-search-wrap">
+        <input type="search" id="blogSearch" placeholder="Search articles…" aria-label="Search blog posts" />
+        <span class="search-icon">&#128269;</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="blog-main container">
+
+    <!-- CATEGORY FILTER -->
+    <div class="category-bar" role="group" aria-label="Filter by category">
+      <button class="cat-btn active" data-cat="all">All Posts</button>
+      <button class="cat-btn" data-cat="Industry News">Industry News</button>
+      <button class="cat-btn" data-cat="Product Guide">Product Guide</button>
+      <button class="cat-btn" data-cat="Sustainability">Sustainability</button>
+      <button class="cat-btn" data-cat="Market Trends">Market Trends</button>
+      <button class="cat-btn" data-cat="Regulatory">Regulatory</button>
+    </div>
+
+    <!-- FEATURED POST -->
+    <div id="featuredPost" class="featured-post" style="display:none;" aria-label="Featured article"></div>
+
+    <!-- POSTS GRID -->
+    <div class="posts-section">
+      <div id="postsGrid" class="posts-grid" aria-live="polite" aria-label="Blog posts"></div>
+      <div id="noResults" class="no-results" style="display:none;">
+        <p>No articles found. Try a different search or category.</p>
+      </div>
+    </div>
+
+    <!-- LOADING SKELETON -->
+    <div id="loadingState" class="posts-grid">
+      <div class="post-skeleton"></div>
+      <div class="post-skeleton"></div>
+      <div class="post-skeleton"></div>
+      <div class="post-skeleton"></div>
+      <div class="post-skeleton"></div>
+      <div class="post-skeleton"></div>
+    </div>
+
+    <!-- ERROR STATE -->
+    <div id="errorState" class="blog-error" style="display:none;">
+      <div class="error-icon">&#9888;</div>
+      <h3>Could not load articles</h3>
+      <p>The blog feed is not configured yet, or there was a network error.</p>
+      <p class="error-hint">Set <code>BLOG_SHEET_URL</code> in blog.js to your Apps Script Web App URL.</p>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="logo footer-logo" aria-label="Aarunya Energies Private Limited — Home">
+            <img src="../images/logo.png" alt="Aarunya Energies" class="logo-img logo-img-footer" />
+            <span class="logo-text">Aarunya<span class="logo-accent">Energies</span></span>
+          </a>
+          <p>Trusted solid biofuel trading company. Reliable supply of briquettes, pellets &amp; wood chips across North India.</p>
+          <p class="footer-est">Established 2025 &middot; Panipat, Haryana</p>
+        </div>
+        <div class="footer-col">
+          <h4>Biofuel Products</h4>
+          <ul>
+            <li><a href="../index.html#products">Mustard Briquettes</a></li>
+            <li><a href="../index.html#products">Groundnut Briquettes</a></li>
+            <li><a href="../index.html#products">Wood Chips</a></li>
+            <li><a href="../index.html#products">Sawdust Briquettes</a></li>
+            <li><a href="../index.html#products">Sawdust Pellets</a></li>
+            <li><a href="../index.html#products">Paddy Straw Pellets</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../index.html#about">About Us</a></li>
+            <li><a href="../index.html#industries">Industries Served</a></li>
+            <li><a href="../index.html#faq">FAQ</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="../index.html#contact">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Reach Us</h4>
+          <p>&#128222; +91 90505 07996</p>
+          <p>&#9993; info@aarunyaenergies.in</p>
+          <p>&#128205; Panipat, Haryana</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Aarunya Energies Private Limited. All rights reserved.</p>
+        <p class="footer-note">Solid Biofuel Trading &middot; Briquettes &amp; Pellets Supplier &middot; Pan-India Biomass Fuel Supply</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top" id="backToTop" aria-label="Back to top">&#8679;</a>
+
+  <script src="../scripts/blog.js"></script>
+</body>
+</html>

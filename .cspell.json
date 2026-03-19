@@ -1,0 +1,15 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "biofuel", "biofuels", "Biofuel", "Biofuels",
+    "Aarunya", "aarunyaenergies",
+    "Agro", "AgroBiofuel", "Panipat",
+    "Rajasthan", "Haryana", "Punjab", "Gujarat",
+    "Uttar", "Pradesh", "Madhya",
+    "gasifiers", "pellets", "briquettes",
+    "sterilisation", "specialising",
+    "agro", "Pharma", "kcal"
+  ],
+  "ignorePaths": ["*.json"]
+}

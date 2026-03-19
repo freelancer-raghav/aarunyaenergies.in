@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Title and meta filled dynamically by blog.js -->
+  <title>Blog | Aarunya Energies</title>
+  <meta name="description" content="" id="metaDesc" />
+  <meta name="robots" content="index, follow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/style.css" />
+  <link rel="stylesheet" href="../styles/blog.css" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+</head>
+<body class="blog-page">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-solid" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="../index.html" class="logo" aria-label="Aarunya Energies Private Limited — Home">
+        <img src="../images/logo.png" alt="Aarunya Energies" class="logo-img" />
+        <span class="logo-text">Aarunya <span class="logo-accent">Energies</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks" role="list">
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#products">Products</a></li>
+        <li><a href="../index.html#industries">Industries</a></li>
+        <li><a href="blog.html" class="nav-active">Blog</a></li>
+        <li><a href="../index.html#contact" class="nav-cta">Get a Quote</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="post-main container" id="postMain">
+
+    <!-- LOADING -->
+    <div id="postLoading" class="post-loading">
+      <div class="post-skel-img"></div>
+      <div class="post-skel-title"></div>
+      <div class="post-skel-meta"></div>
+      <div class="post-skel-body"></div>
+    </div>
+
+    <!-- ERROR -->
+    <div id="postError" class="blog-error" style="display:none;">
+      <div class="error-icon">&#9888;</div>
+      <h3>Article not found</h3>
+      <p>This post may have been removed or the URL is incorrect.</p>
+      <a href="blog.html" class="btn btn-primary" style="margin-top:20px;">Back to Blog</a>
+    </div>
+
+    <!-- ARTICLE — filled by JS -->
+    <article id="postArticle" style="display:none;">
+
+      <!-- BREADCRUMB -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a>
+        <span aria-hidden="true">›</span>
+        <a href="blog.html">Blog</a>
+        <span aria-hidden="true">›</span>
+        <span id="breadcrumbTitle"></span>
+      </nav>
+
+      <!-- CATEGORY TAG -->
+      <div id="postCategory" class="post-category-tag"></div>
+
+      <!-- TITLE -->
+      <h1 id="postTitle" class="post-title"></h1>
+
+      <!-- META ROW -->
+      <div class="post-meta-row">
+        <div class="post-meta-item">
+          <span class="meta-icon">&#128197;</span>
+          <span id="postDate"></span>
+        </div>
+        <div class="post-meta-item">
+          <span class="meta-icon">&#9997;</span>
+          <span id="postAuthor"></span>
+        </div>
+        <div class="post-meta-item" id="postReadTime"></div>
+      </div>
+
+      <!-- TAGS -->
+      <div id="postTags" class="post-tags"></div>
+
+      <!-- FEATURED IMAGE -->
+      <div id="postImageWrap" class="post-featured-image" style="display:none;">
+        <img id="postImage" src="" alt="" loading="lazy" />
+      </div>
+
+      <!-- CONTENT -->
+      <div id="postContent" class="post-content"></div>
+
+      <!-- DIVIDER -->
+      <hr class="post-divider" />
+
+      <!-- FOOTER ACTIONS -->
+      <div class="post-footer-actions">
+        <a href="blog.html" class="btn-back">&#8592; Back to Blog</a>
+        <a href="../index.html#contact" class="btn btn-primary">Get a Quote</a>
+      </div>
+
+      <!-- RELATED POSTS -->
+      <div id="relatedPosts" class="related-posts" style="display:none;">
+        <h3>Related Articles</h3>
+        <div id="relatedGrid" class="posts-grid"></div>
+      </div>
+
+    </article>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="logo footer-logo">
+            <img src="../images/logo.png" alt="Aarunya Energies" class="logo-img logo-img-footer" />
+            <span class="logo-text">Aarunya<span class="logo-accent">Energies</span></span>
+          </a>
+          <p>Trusted solid biofuel trading company. Reliable supply of briquettes, pellets &amp; wood chips across North India.</p>
+          <p class="footer-est">Established 2025 &middot; Panipat, Haryana</p>
+        </div>
+        <div class="footer-col">
+          <h4>Biofuel Products</h4>
+          <ul>
+            <li><a href="../index.html#products">Mustard Briquettes</a></li>
+            <li><a href="../index.html#products">Groundnut Briquettes</a></li>
+            <li><a href="../index.html#products">Sawdust Pellets</a></li>
+            <li><a href="../index.html#products">Paddy Straw Pellets</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../index.html#about">About Us</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="../index.html#faq">FAQ</a></li>
+            <li><a href="../index.html#contact">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Reach Us</h4>
+          <p>&#128222; +91 90505 07996</p>
+          <p>&#9993; info@aarunyaenergies.in</p>
+          <p>&#128205; Panipat, Haryana</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Aarunya Energies Private Limited. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top" id="backToTop" aria-label="Back to top">&#8679;</a>
+
+  <script src="../scripts/blog.js"></script>
+</body>
+</html>
