@@ -329,15 +329,20 @@ async function fetchPost(slug) {
 
 /**
  * Resolves an image_url from the sheet into a usable src path.
- *   - Absolute URL (http/https) → used as-is
- *   - Root-relative (/blog/...)  → used as-is
- *   - Contains '/'              → treated as already-relative path, used as-is
- *   - Plain filename (no '/')   → prepended with blog_images/
+ *   - Absolute URL (http/https)      → used as-is
+ *   - Already root-relative (/...)   → used as-is
+ *   - Plain filename (no '/')        → /blog/blog_images/filename
+ *   - blog_images/filename           → /blog/blog_images/filename
+ *
+ * Root-relative paths (/blog/...) are used so the URL always resolves
+ * correctly on GitHub Pages regardless of the current page URL.
  */
 function resolveImg(url) {
   if (!url) return '';
-  if (url.startsWith('http') || url.startsWith('/') || url.includes('/')) return url;
-  return 'blog_images/' + url;
+  if (url.startsWith('http') || url.startsWith('/')) return url;
+  // Strip leading "blog_images/" if present, then build root-relative path
+  var filename = url.startsWith('blog_images/') ? url.slice('blog_images/'.length) : url;
+  return '/blog/blog_images/' + filename;
 }
 
 function formatDate(dateStr) {
