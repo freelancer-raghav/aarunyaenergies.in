@@ -123,7 +123,6 @@ function renderListing() {
   }
 
   const grid     = document.getElementById('postsGrid');
-  const noRes    = document.getElementById('noResults');
   const featured = document.getElementById('featuredPost');
 
   if (posts.length === 0) {
@@ -150,7 +149,7 @@ function renderFeatured(post) {
   const el    = document.getElementById('featuredPost');
   const emoji = CAT_EMOJI[post.category] || CAT_EMOJI['default'];
   const imgHTML = post.image_url
-    ? `<img src="${escHtml(post.image_url)}" alt="${escHtml(post.title)}" loading="lazy" />`
+    ? `<img src="${escHtml(resolveImg(post.image_url))}" alt="${escHtml(post.title)}" loading="lazy" />`
     : `<div class="featured-img-placeholder">${emoji}</div>`;
 
   el.innerHTML = `
@@ -186,7 +185,7 @@ function renderGrid(posts) {
 function postCardHTML(post) {
   const emoji  = CAT_EMOJI[post.category] || CAT_EMOJI['default'];
   const imgHTML = post.image_url
-    ? `<img src="${escHtml(post.image_url)}" alt="${escHtml(post.title)}" loading="lazy" />`
+    ? `<img src="${escHtml(resolveImg(post.image_url))}" alt="${escHtml(post.title)}" loading="lazy" />`
     : `<div class="post-card-img-placeholder">${emoji}</div>`;
 
   return `
@@ -256,7 +255,7 @@ async function initPostPage() {
     // Featured image
     if (post.image_url) {
       const imgWrap = document.getElementById('postImageWrap');
-      document.getElementById('postImage').src = post.image_url;
+      document.getElementById('postImage').src = resolveImg(post.image_url);
       document.getElementById('postImage').alt = post.title;
       imgWrap.style.display = '';
     }
@@ -327,6 +326,20 @@ async function fetchPost(slug) {
 // ============================================================
 //  HELPERS
 // ============================================================
+
+/**
+ * Resolves an image_url from the sheet into a usable src path.
+ *   - Absolute URL (http/https) → used as-is
+ *   - Root-relative (/blog/...)  → used as-is
+ *   - Contains '/'              → treated as already-relative path, used as-is
+ *   - Plain filename (no '/')   → prepended with blog_images/
+ */
+function resolveImg(url) {
+  if (!url) return '';
+  if (url.startsWith('http') || url.startsWith('/') || url.includes('/')) return url;
+  return 'blog_images/' + url;
+}
+
 function formatDate(dateStr) {
   if (!dateStr) return '';
   const d = new Date(dateStr);
