@@ -260,8 +260,8 @@ async function initPostPage() {
       imgWrap.style.display = '';
     }
 
-    // Content — rendered as HTML (written in the sheet)
-    document.getElementById('postContent').innerHTML = post.content || '';
+    // Content — convert plain text / \n-separated paragraphs to HTML
+    document.getElementById('postContent').innerHTML = toHtml(post.content);
 
     // Show article
     hideEl('postLoading');
@@ -343,6 +343,30 @@ function resolveImg(url) {
   // Strip leading "blog_images/" if present, then build root-relative path
   var filename = url.startsWith('blog_images/') ? url.slice('blog_images/'.length) : url;
   return '/blog/blog_images/' + filename;
+}
+
+/**
+ * Converts plain-text blog content (with literal \n or real newlines) to HTML.
+ * - If content already contains HTML block tags → used as-is (supports rich HTML)
+ * - Otherwise: literal \n → real newline, blank lines → paragraph breaks,
+ *   single newlines → <br> within a paragraph
+ */
+function toHtml(text) {
+  if (!text) return '';
+  // Already has HTML block tags → trust it as-is
+  if (/<(p|h[1-6]|ul|ol|table|div|blockquote)\b/i.test(text)) return text;
+  // Convert literal \n (two chars: backslash + n) to real newline
+  var normalized = text.replace(/\\n/g, '\n');
+  // Split on one or more blank lines → separate paragraphs
+  return normalized
+    .split(/\n{2,}/)
+    .map(function(para) { return para.trim(); })
+    .filter(Boolean)
+    .map(function(para) {
+      // Single newlines within a paragraph → <br>
+      return '<p>' + para.replace(/\n/g, '<br>') + '</p>';
+    })
+    .join('');
 }
 
 function formatDate(dateStr) {
