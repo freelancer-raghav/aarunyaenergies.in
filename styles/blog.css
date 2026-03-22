@@ -505,6 +505,9 @@
   font-size: 1.05rem;
   line-height: 1.85;
   color: var(--text-dark);
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 .post-content h2 {
   font-family: 'Poppins', sans-serif;
