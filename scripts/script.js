@@ -266,12 +266,24 @@ function homeBlogCardHTML(post) {
 
 function formatHomeBlogDate(str) {
   if (!str) return '';
-  // Handle DD-MM-YYYY or DD/MM/YYYY (common Indian entry format)
+  str = String(str).trim();
+
+  let day, mon, year;
+
+  // DD-MM-YYYY or DD/MM/YYYY
   const dmy = str.match(/^(\d{1,2})[-\/](\d{1,2})[-\/](\d{4})$/);
-  if (dmy) str = `${dmy[3]}-${dmy[2].padStart(2,'0')}-${dmy[1].padStart(2,'0')}`;
-  const d = new Date(str);
-  if (isNaN(d)) return str; // fallback: show raw value rather than "Invalid Date"
-  return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+  if (dmy) { day = +dmy[1]; mon = +dmy[2] - 1; year = +dmy[3]; }
+
+  // YYYY-MM-DD (ISO from Apps Script)
+  const ymd = str.match(/^(\d{4})[-\/](\d{1,2})[-\/](\d{1,2})$/);
+  if (ymd) { year = +ymd[1]; mon = +ymd[2] - 1; day = +ymd[3]; }
+
+  if (day && mon !== undefined && year) {
+    const d = new Date(year, mon, day); // local time — no timezone shift
+    return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+
+  return str; // fallback: show as-is rather than "Invalid Date"
 }
 
 function resolveHomeBlogImg(url) {

@@ -371,12 +371,22 @@ function toHtml(text) {
 
 function formatDate(dateStr) {
   if (!dateStr) return '';
-  // Handle DD-MM-YYYY or DD/MM/YYYY (common Indian entry format)
+  dateStr = String(dateStr).trim();
+
+  let day, mon, year;
+
   const dmy = dateStr.match(/^(\d{1,2})[-\/](\d{1,2})[-\/](\d{4})$/);
-  if (dmy) dateStr = `${dmy[3]}-${dmy[2].padStart(2,'0')}-${dmy[1].padStart(2,'0')}`;
-  const d = new Date(dateStr);
-  if (isNaN(d)) return dateStr;
-  return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+  if (dmy) { day = +dmy[1]; mon = +dmy[2] - 1; year = +dmy[3]; }
+
+  const ymd = dateStr.match(/^(\d{4})[-\/](\d{1,2})[-\/](\d{1,2})$/);
+  if (ymd) { year = +ymd[1]; mon = +ymd[2] - 1; day = +ymd[3]; }
+
+  if (day && mon !== undefined && year) {
+    const d = new Date(year, mon, day);
+    return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  return dateStr;
 }
 
 function readTime(text) {
