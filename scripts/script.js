@@ -195,4 +195,85 @@ document.addEventListener('DOMContentLoaded', () => {
 
   sections.forEach(s => sectionObserver.observe(s));
 
+  // ---- Latest 4 blogs on homepage ----
+  loadHomeBlog();
+
 });
+
+
+const CAT_EMOJI_HOME = {
+  'Industry News':  '📰',
+  'Product Guide':  '📦',
+  'Sustainability': '🌿',
+  'Market Trends':  '📈',
+  'Regulatory':     '⚖️',
+  'default':        '🔥',
+};
+
+async function loadHomeBlog() {
+  const grid  = document.getElementById('homeBlogGrid');
+  const error = document.getElementById('homeBlogError');
+  if (!grid) return;
+
+  if (!GOOGLE_SHEET_URL || GOOGLE_SHEET_URL.includes('PASTE_YOUR')) {
+    grid.style.display = 'none';
+    error.style.display = '';
+    return;
+  }
+
+  try {
+    const res   = await fetch(`${GOOGLE_SHEET_URL}?action=blog_posts`);
+    const posts = await res.json();
+
+    if (!Array.isArray(posts) || posts.length === 0) {
+      grid.style.display = 'none';
+      error.style.display = '';
+      return;
+    }
+
+    const latest = posts.slice(0, 4);
+    grid.innerHTML = latest.map(post => homeBlogCardHTML(post)).join('');
+
+  } catch (_) {
+    grid.style.display = 'none';
+    error.style.display = '';
+  }
+}
+
+function homeBlogCardHTML(post) {
+  const emoji   = CAT_EMOJI_HOME[post.category] || CAT_EMOJI_HOME['default'];
+  const imgEl   = post.image_url
+    ? `<img class="home-blog-card-img" src="${resolveHomeBlogImg(post.image_url)}" alt="${escHome(post.title)}" loading="lazy" />`
+    : `<div class="home-blog-card-img-placeholder">${emoji}</div>`;
+
+  const date = post.date ? new Date(post.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+
+  return `
+    <a href="blog/blog-post.html?slug=${encodeURIComponent(post.slug)}" class="home-blog-card">
+      ${imgEl}
+      <div class="home-blog-card-body">
+        <div class="home-blog-card-cat">${escHome(post.category)}</div>
+        <div class="home-blog-card-title">${escHome(post.title)}</div>
+        <div class="home-blog-card-excerpt">${escHome(post.excerpt)}</div>
+        <div class="home-blog-card-meta">
+          <span>${date}</span>
+          <span class="home-blog-card-read">Read &rarr;</span>
+        </div>
+      </div>
+    </a>
+  `;
+}
+
+function resolveHomeBlogImg(url) {
+  if (!url) return '';
+  if (url.startsWith('http') || url.startsWith('/')) return url;
+  const filename = url.startsWith('blog_images/') ? url.slice('blog_images/'.length) : url;
+  return '/blog/blog_images/' + filename;
+}
+
+function escHome(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}

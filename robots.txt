@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.aarunyaenergies.in/sitemap.xml
+Sitemap: https://aarunyaenergies.in/sitemap.xml

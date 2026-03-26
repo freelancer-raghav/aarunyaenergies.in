@@ -3,7 +3,7 @@
 
   <!-- Homepage -->
   <url>
-    <loc>https://www.aarunyaenergies.in/</loc>
+    <loc>https://aarunyaenergies.in/</loc>
     <lastmod>2025-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
@@ -11,7 +11,7 @@
 
   <!-- Blog listing -->
   <url>
-    <loc>https://www.aarunyaenergies.in/blog/blog.html</loc>
+    <loc>https://aarunyaenergies.in/blog/blog.html</loc>
     <lastmod>2025-03-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
