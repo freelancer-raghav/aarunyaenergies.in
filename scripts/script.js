@@ -246,7 +246,7 @@ function homeBlogCardHTML(post) {
     ? `<img class="home-blog-card-img" src="${resolveHomeBlogImg(post.image_url)}" alt="${escHome(post.title)}" loading="lazy" />`
     : `<div class="home-blog-card-img-placeholder">${emoji}</div>`;
 
-  const date = post.date ? new Date(post.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+  const date = formatHomeBlogDate(post.date);
 
   return `
     <a href="blog/blog-post.html?slug=${encodeURIComponent(post.slug)}" class="home-blog-card">
@@ -262,6 +262,16 @@ function homeBlogCardHTML(post) {
       </div>
     </a>
   `;
+}
+
+function formatHomeBlogDate(str) {
+  if (!str) return '';
+  // Handle DD-MM-YYYY or DD/MM/YYYY (common Indian entry format)
+  const dmy = str.match(/^(\d{1,2})[-\/](\d{1,2})[-\/](\d{4})$/);
+  if (dmy) str = `${dmy[3]}-${dmy[2].padStart(2,'0')}-${dmy[1].padStart(2,'0')}`;
+  const d = new Date(str);
+  if (isNaN(d)) return str; // fallback: show raw value rather than "Invalid Date"
+  return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
 function resolveHomeBlogImg(url) {
